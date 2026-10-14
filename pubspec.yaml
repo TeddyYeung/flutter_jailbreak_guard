@@ -1,0 +1,33 @@
+name: flutter_jailbreak_guard
+description: "Detects jailbroken iOS devices and rooted Android devices. Supports Swift Package Manager and CocoaPods."
+version: 0.1.0
+repository: https://github.com/TeddyYeung/flutter_jailbreak_guard
+issue_tracker: https://github.com/TeddyYeung/flutter_jailbreak_guard/issues
+topics:
+  - security
+  - jailbreak
+  - root-detection
+  - swift-package-manager
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: dev.is_a.teddyyeung.flutter_jailbreak_guard
+        pluginClass: FlutterJailbreakGuardPlugin
+      ios:
+        pluginClass: FlutterJailbreakGuardPlugin
