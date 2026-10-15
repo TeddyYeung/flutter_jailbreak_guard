@@ -14,27 +14,45 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _status = 'Checking';
+  String _jailbreakStatus = 'Checking';
+  String _developerModeStatus = 'Checking';
 
   @override
   void initState() {
     super.initState();
-    _checkJailbreak();
+    _checkDevice();
   }
 
-  Future<void> _checkJailbreak() async {
-    String status;
-    try {
-      status = await FlutterJailbreakGuard.isJailbroken ? 'Jailbroken' : 'Not jailbroken';
-    } on PlatformException catch (e) {
-      status = 'Failed: ${e.code}';
-    }
+  Future<void> _checkDevice() async {
+    final jailbreakStatus = await _describe(
+      check: () => FlutterJailbreakGuard.isJailbroken,
+      onTrue: 'Jailbroken',
+      onFalse: 'Not jailbroken',
+    );
+    final developerModeStatus = await _describe(
+      check: () => FlutterJailbreakGuard.isDeveloperMode,
+      onTrue: 'On',
+      onFalse: 'Off',
+    );
 
     if (!mounted) return;
 
     setState(() {
-      _status = status;
+      _jailbreakStatus = jailbreakStatus;
+      _developerModeStatus = developerModeStatus;
     });
+  }
+
+  Future<String> _describe({
+    required Future<bool> Function() check,
+    required String onTrue,
+    required String onFalse,
+  }) async {
+    try {
+      return await check() ? onTrue : onFalse;
+    } on PlatformException catch (e) {
+      return 'Failed: ${e.code}';
+    }
   }
 
   @override
@@ -42,7 +60,15 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('flutter_jailbreak_guard')),
-        body: Center(child: Text('Status: $_status')),
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Status: $_jailbreakStatus'),
+              Text('Developer mode: $_developerModeStatus'),
+            ],
+          ),
+        ),
       ),
     );
   }

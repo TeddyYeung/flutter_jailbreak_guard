@@ -18,4 +18,8 @@ abstract class FlutterJailbreakGuardPlatform extends PlatformInterface {
   Future<bool> isJailbroken() {
     throw UnimplementedError('isJailbroken() has not been implemented.');
   }
+
+  Future<bool> isDeveloperMode() {
+    throw UnimplementedError('isDeveloperMode() has not been implemented.');
+  }
 }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'flutter_jailbreak_guard'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'Jailbreak and root detection for Flutter.'
   s.description      = <<-DESC
 Detects jailbroken iOS devices with IOSSecuritySuite and rooted Android devices with RootBeer.

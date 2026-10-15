@@ -11,6 +11,8 @@ public class FlutterJailbreakGuardPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "isJailbroken":
       result(IOSSecuritySuite.amIJailbroken())
+    case "isDeveloperMode":
+      result(IOSSecuritySuite.amIRunInEmulator())
     default:
       result(FlutterMethodNotImplemented)
     }

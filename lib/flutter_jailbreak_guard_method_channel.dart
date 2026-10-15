@@ -7,11 +7,13 @@ class MethodChannelFlutterJailbreakGuard extends FlutterJailbreakGuardPlatform {
   final methodChannel = const MethodChannel('flutter_jailbreak_guard');
 
   @override
-  Future<bool> isJailbroken() async {
-    final isJailbroken = await methodChannel.invokeMethod<bool>('isJailbroken');
-    if (isJailbroken == null) {
-      throw PlatformException(code: 'null_result', message: 'isJailbroken returned null.');
-    }
-    return isJailbroken;
+  Future<bool> isJailbroken() => _invokeFailClosed('isJailbroken');
+
+  @override
+  Future<bool> isDeveloperMode() => _invokeFailClosed('isDeveloperMode');
+
+  Future<bool> _invokeFailClosed(String method) async {
+    final result = await methodChannel.invokeMethod<bool>(method);
+    return result ?? true;
   }
 }

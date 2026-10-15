@@ -4,4 +4,6 @@ class FlutterJailbreakGuard {
   const FlutterJailbreakGuard._();
 
   static Future<bool> get isJailbroken => FlutterJailbreakGuardPlatform.instance.isJailbroken();
+
+  static Future<bool> get isDeveloperMode => FlutterJailbreakGuardPlatform.instance.isDeveloperMode();
 }

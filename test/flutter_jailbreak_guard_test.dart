@@ -7,6 +7,9 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class FakeFlutterJailbreakGuardPlatform with MockPlatformInterfaceMixin implements FlutterJailbreakGuardPlatform {
   @override
   Future<bool> isJailbroken() => Future.value(true);
+
+  @override
+  Future<bool> isDeveloperMode() => Future.value(false);
 }
 
 void main() {
@@ -20,5 +23,11 @@ void main() {
     FlutterJailbreakGuardPlatform.instance = FakeFlutterJailbreakGuardPlatform();
 
     expect(await FlutterJailbreakGuard.isJailbroken, isTrue);
+  });
+
+  test('isDeveloperMode delegates to the platform instance', () async {
+    FlutterJailbreakGuardPlatform.instance = FakeFlutterJailbreakGuardPlatform();
+
+    expect(await FlutterJailbreakGuard.isDeveloperMode, isFalse);
   });
 }

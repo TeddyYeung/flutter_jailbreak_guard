@@ -8,4 +8,8 @@ void main() {
   testWidgets('isJailbroken returns a native result', (tester) async {
     expect(await FlutterJailbreakGuard.isJailbroken, isA<bool>());
   });
+
+  testWidgets('isDeveloperMode returns a native result', (tester) async {
+    expect(await FlutterJailbreakGuard.isDeveloperMode, isA<bool>());
+  });
 }

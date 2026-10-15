@@ -9,9 +9,9 @@ void main() {
   const channel = MethodChannel('flutter_jailbreak_guard');
   final messenger = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
 
-  void mockResult(Object? result) {
+  void mockResult({required String method, required Object? result}) {
     messenger.setMockMethodCallHandler(channel, (methodCall) async {
-      return methodCall.method == 'isJailbroken' ? result : null;
+      return methodCall.method == method ? result : null;
     });
   }
 
@@ -20,14 +20,26 @@ void main() {
   });
 
   test('isJailbroken returns the native result', () async {
-    mockResult(false);
+    mockResult(method: 'isJailbroken', result: false);
 
     expect(await platform.isJailbroken(), isFalse);
   });
 
-  test('isJailbroken throws PlatformException when the native result is null', () async {
-    mockResult(null);
+  test('isJailbroken returns true when the native result is null', () async {
+    mockResult(method: 'isJailbroken', result: null);
 
-    expect(platform.isJailbroken(), throwsA(isA<PlatformException>()));
+    expect(await platform.isJailbroken(), isTrue);
+  });
+
+  test('isDeveloperMode returns the native result', () async {
+    mockResult(method: 'isDeveloperMode', result: false);
+
+    expect(await platform.isDeveloperMode(), isFalse);
+  });
+
+  test('isDeveloperMode returns true when the native result is null', () async {
+    mockResult(method: 'isDeveloperMode', result: null);
+
+    expect(await platform.isDeveloperMode(), isTrue);
   });
 }

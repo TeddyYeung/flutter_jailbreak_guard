@@ -1,6 +1,7 @@
 package dev.is_a.teddyyeung.flutter_jailbreak_guard
 
 import android.content.Context
+import android.provider.Settings
 import com.scottyab.rootbeer.RootBeer
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -33,9 +34,13 @@ class FlutterJailbreakGuardPlugin :
     ) {
         when (call.method) {
             "isJailbroken" -> result.success(RootBeer(context).isRooted)
+            "isDeveloperMode" -> result.success(isDeveloperMode())
             else -> result.notImplemented()
         }
     }
+
+    private fun isDeveloperMode(): Boolean =
+        Settings.Global.getInt(context.contentResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
