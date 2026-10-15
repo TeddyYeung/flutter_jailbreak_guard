@@ -1,3 +1,8 @@
+## 0.2.1
+
+* Accept IOSSecuritySuite 1.9.10 or later and earlier than 3.0. Apps can pin the BSD-licensed 1.9.x.
+* Rewrite the README: quick start, comparison matrix, migration guide, and iOS engine license.
+
 ## 0.2.0
 
 * Add `FlutterJailbreakGuard.isDeveloperMode`. It matches `developerMode` of flutter_jailbreak_detection_plus.

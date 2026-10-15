@@ -1,6 +1,6 @@
 name: flutter_jailbreak_guard
 description: "Detects jailbroken iOS devices and rooted Android devices. Supports Swift Package Manager and CocoaPods."
-version: 0.2.0
+version: 0.2.1
 repository: https://github.com/TeddyYeung/flutter_jailbreak_guard
 issue_tracker: https://github.com/TeddyYeung/flutter_jailbreak_guard/issues
 topics:

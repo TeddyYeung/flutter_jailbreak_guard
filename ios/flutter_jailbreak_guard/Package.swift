@@ -12,7 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "FlutterFramework", path: "../FlutterFramework"),
-        .package(url: "https://github.com/securing/IOSSecuritySuite.git", from: "2.2.0")
+        .package(url: "https://github.com/securing/IOSSecuritySuite.git", "1.9.10"..<"3.0.0")
     ],
     targets: [
         .target(
